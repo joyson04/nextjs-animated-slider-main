@@ -1,0 +1,67 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Next.js Animated Slider API",
+      "version": "1.0.0",
+      "description": "API for managing and displaying slides in the animated slider"
+    },
+    "paths": {
+      "/": {
+        "get": {
+          "summary": "Get all slides",
+          "operationId": "getAllSlides",
+          "responses": {
+            "200": {
+              "description": "A list of slides",
+              "content": {
+                "application/json": {
+                  "example": [
+                    {
+                      "img": "/1.png",
+                      "title": "Saint Antonen",
+                      "description": "A beautiful view of the Swiss Alps",
+                      "location": "Switzerland"
+                    },
+                    {
+                      "img": "/2.png",
+                      "title": "The Grand Canyon",
+                      "description": "The geological history of the Grand Canyon opens before your eyes.",
+                      "location": "Arizona"
+                    },
+                    {
+                      "img": "/3.png",
+                      "title": "Lofoten Islands",
+                      "description": "Dramatic peaks and northern lights in Norway's Arctic Circle.",
+                      "location": "Norway"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "/1.png": {
+        "get": {
+          "summary": "Get the 1.png image",
+          "operationId": "get1PngImage",
+          "responses": {
+            "200": {
+              "description": "The 3.png image file",
+              "content": {
+                "image/png": {
+                  "schema": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Image not found"
+            }
+          }
+        }
+      }
+    }
+  }
