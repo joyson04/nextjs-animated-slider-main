@@ -1,0 +1,282 @@
+pipeline {
+    agent any
+
+    tools {
+        nodejs "node"
+    }
+
+    environment {
+        SONAR_HOME = tool 'sonar-scanner'
+    }
+
+
+    stages {
+        stage('GIT') {
+            steps {
+                git branch: 'main', url: 'https://github.com/joyson04/nextjs-animated-slider-main.git'
+            }
+        }
+
+        stage('Depency Nodejs') {
+            steps {
+                sh "yarn install"
+            }
+        }
+
+        stage('Sonarscanner Analayse') {
+            steps {
+               withSonarQubeEnv('sonar-server') {
+                    sh  '''
+                            $SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=nextjs-animated-slider \
+                            -Dsonar.projectKey=nextjs-animated-slider \
+                            -Dsonar.sources=. \
+                            -Dsonar.inclusions=**/*.js,**/*.tsx
+                        '''
+                    sh 'echo $SONAR_HOME'
+               }
+            }
+        }
+
+       
+        stage('Quality Gate check') {
+            steps {
+               timeout(time: 1, unit: 'HOURS') {
+                    waitForQualityGate abortPipeline: true //pipeline cloudn't break
+                }
+            }
+        }
+
+        
+        stage('OWASP Dependency Track') {
+            steps {
+                dependencyCheck additionalArguments: '--scan . ', odcInstallation: 'owasp'
+                    dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
+
+        
+        stage('Publish to Nexus NPM Repo') {
+            steps {
+                configFileProvider([configFile(fileId: 'npmrc', targetLocation: '.')]) {
+                    sh "npm publish"
+                }
+            }
+        }
+
+        stage('SNYK Latest Download') {
+            steps {
+                script {
+                    sh "curl -Lo snyk https://github.com/snyk/snyk/releases/latest/download/snyk-linux"
+                    sh "curl -O -s -L https://github.com/snyk/cli/releases/download/v1.1296.2/snyk-linux.sha256"
+                    sh "shasum snyk-linux.sha256"
+                    sh "chmod +x snyk"
+                    sh "./snyk --version"
+                }
+            }
+        }
+
+
+        stage('hadolint Latest Download') {
+            steps {
+                script {
+                    sh "curl -Lo hadolint https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64"
+                    sh "curl -O -s -L https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64.sha256"
+                    sh "shasum hadolint-Linux-x86_64.sha256"
+                    sh "chmod +x hadolint"
+                    sh "./hadolint --version"
+                }
+            }
+        }
+
+        stage('SNYK AUTH') {
+            steps {
+                withCredentials([string(credentialsId: 'orgination-Snyk-API-Token', variable: 'SNYK_TOKEN')]) {
+                    sh "./snyk auth ${SNYK_TOKEN}"
+                }
+            }
+        }
+
+
+        stage('Snyk Code') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh './snyk code test --sarif-file-output=results-code.sarif'
+                }
+                recordIssues sourceCodeRetention: 'LAST_BUILD', tools: [sarif(id: 'snyk-container', name: 'Snyk Container', pattern: 'results-container.sarif')]
+            }
+        }
+
+        stage('Snyk IaC') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh './snyk iac test --sarif-file-output=results-iac.sarif'
+                }
+                recordIssues sourceCodeRetention: 'LAST_BUILD', tools: [sarif(id: 'snyk-container', name: 'Snyk Container', pattern: 'results-container.sarif')]
+            }
+        }
+        
+
+        stage('SNYK Test') {
+            steps {
+                withCredentials([string(credentialsId: 'orgination-Snyk-API-Token', variable: 'SNYK_TOKEN')]) {
+                    script {
+                        def snykStatus = sh(script: "./snyk test ", returnStatus: true)
+                        if (snykStatus != 0) {
+                            echo "./Snyk test reported issues (exit code ${snykStatus})"
+                            // Optionally set build as unstable or failed
+                            currentBuild.result = 'UNSTABLE'
+                        } else {
+                            echo "Snyk test passed cleanly"
+                        }
+                    }
+                }
+            }
+        }
+  
+        stage('SNYK Monitoring') {
+            steps {
+                withCredentials([string(credentialsId: 'orgination-Snyk-API-Token', variable: 'SNYK_TOKEN')]) {
+                    script {
+                        def snykStatusm = sh(script: "./snyk monitor", returnStatus: true)
+                        if (snykStatusm != 0) {
+                            error("Snyk monitor failed (exit code ${snykStatusm})")
+                        } else {
+                            echo "Snyk monitoring successful"
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('hadolint (report only)') {
+            steps {
+                script {
+                     // Fail only on error level issues or higher, ignoring warnings
+                    def result = sh(script: './hadolint --failure-threshold error Dockerfile', returnStatus: true)
+                    if (result != 0) {
+                        echo 'Hadolint found issues, but proceeding...'
+                    } 
+                }
+            }
+        }
+
+        stage('hadolint custom severity levels') {
+            steps {
+               sh " ./hadolint  --error DL3018 --warning DL3013 --info DL3025 Dockerfile "
+            }
+        }
+
+
+        stage('Trivy Image Scan') {
+            steps {
+               sh " trivy image --scanners vuln --format table -o image.html aravindh05/devscops_testing_frontend "
+            }
+        }
+
+        stage('Docker-Scout Latest Download') {
+            steps {
+                script {
+                    sh "wget https://github.com/docker/scout-cli/releases/download/v1.17.1/docker-scout_1.17.1_linux_amd64.tar.gz"
+                    sh "tar -xvf  docker-scout_1.17.1_linux_amd64.tar.gz.1"
+                    sh "chmod +x docker-scout"
+                    sh "./docker-scout version"
+                }
+            }
+        }
+
+        stage('Docker-Scout CVES Scan') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'hub-docker', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                }
+
+               sh " ./docker-scout cves aravindh05/devscops_testing_frontend "
+            }
+        }
+
+        stage('Trivy OS Patch') {
+            steps {
+               sh " trivy image --vuln-type os --ignore-unfixed -f json --output patch.json  aravindh05/devscops_testing_frontend "
+            }
+        }
+
+        stage('copa Install') {
+            steps {
+                
+                // Remove existing container if it exists
+                sh 'docker rm -f buildkitd || true'
+                sh "docker run -d --name buildkitd --privileged moby/buildkit:latest"
+                sh "wget https://github.com/project-copacetic/copacetic/releases/download/v0.10.0/copa_0.10.0_linux_amd64.tar.gz"
+                sh "tar -xvf copa_0.10.0_linux_amd64.tar.gz"
+                sh "chmod +x copa"
+                sh "./copa --version"
+            }
+        }
+
+
+        stage('Copa AutoFix Patch') {
+            steps {
+                script {
+                    // Run Trivy scan and generate a JSON report
+                    sh "trivy image --vuln-type os --ignore-unfixed -f json --output patch.json aravindh05/devscops_testing_frontend"
+
+                    // Check for vulnerabilities using grep on Trivy's standard output
+                    def patch = sh(
+                        script: "trivy image --vuln-type os --ignore-unfixed aravindh05/devscops_testing_frontend | grep -c 'Total'",
+                        returnStdout: true
+                    ).trim()
+
+                    if (patch.toInteger() > 0) {
+                        echo "Copa Patch Fixing ..."
+                        sh "./copa patch -i aravindh05/devscops_testing_frontend -r patch.json -t 1-patched --addr docker-container://buildkitd"
+                    } else {
+                        echo "NO Patch Container"
+                    }
+                }
+            }
+        }   
+
+        stage('DOCKER RUNNING') {
+            steps {
+                script {
+                    // Remove existing container if it exists
+                    sh 'docker rm -f react-app || true'
+
+                    // Pull and run the Docker image
+                    withDockerRegistry(credentialsId: 'hub-docker') {
+                        sh "docker run -d --name react-app -p 3000:3000 aravindh05/devscops_testing_frontend"
+                    }
+
+                    // Optional: Verify the container is running
+                    def dockerStatus = sh(script: 'docker ps -f name=react-app --format "{{.Names}}"', returnStdout: true).trim()
+                    if (dockerStatus != 'react-app') {
+                        error("Docker container did not start properly.")
+                    }
+                }
+            }
+        }   
+
+        stage('Run ZAP API Scan') {
+            steps {
+                script {
+                    def targetUrl = "http://localhost:3000"
+                    def currentDir = sh(script: 'pwd', returnStdout: true).trim()
+
+                    def zapExitCode = sh(
+                    script: """
+                        echo "Running ZAP scan against: ${targetUrl}"
+                        docker run -v ${currentDir}:/zap/wrk/:rw --network="host" -t zaproxy/zap-weekly zap-api-scan.py -t ${targetUrl}/api-docs -f openapi -r /tmp/scan_zap_report.html 
+                    """,
+                    returnStatus: true
+                    )
+
+                    echo "ZAP scan finished with exit code: ${zapExitCode}"
+                    if (zapExitCode > 0) {
+                        echo "ZAP reported alerts. Continuing pipeline but marking as UNSTABLE."
+                        currentBuild.result = 'UNSTABLE'
+                    }
+                }
+            }
+        }
+    }
+}
