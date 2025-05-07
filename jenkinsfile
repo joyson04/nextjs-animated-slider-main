@@ -106,15 +106,6 @@ pipeline {
             }
         }
 
-        stage('Snyk IaC') {
-            steps {
-                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh './snyk iac test --sarif-file-output=results-iac.sarif'
-                }
-                recordIssues sourceCodeRetention: 'LAST_BUILD', tools: [sarif(id: 'snyk-container', name: 'Snyk Container', pattern: 'results-container.sarif')]
-            }
-        }
-        
 
         stage('SNYK Test') {
             steps {
@@ -212,29 +203,37 @@ pipeline {
                 sh "./copa --version"
             }
         }
-
-
-        stage('Copa AutoFix Patch') {
+        
+        
+        stage('Trivy Scan OS') {
             steps {
                 script {
-                    // Run Trivy scan and generate a JSON report
-                    sh "trivy image --vuln-type os --ignore-unfixed -f json --output patch.json aravindh05/devscops_testing_frontend"
+                    def imageName = "aravindh05/devscops_testing_frontend"
+                    echo "Scanning Docker image: ${imageName}"
 
-                    // Check for vulnerabilities using grep on Trivy's standard output
-                    def patch = sh(
-                        script: "trivy image --vuln-type os --ignore-unfixed aravindh05/devscops_testing_frontend | grep -c 'Total'",
-                        returnStdout: true
-                    ).trim()
+                    // Run Trivy and capture the output
+                    def scanOutput = sh(script: "trivy image --quiet --vuln-type os --ignore-unfixed ${imageName}", returnStdout: true)
 
-                    if (patch.toInteger() > 0) {
-                        echo "Copa Patch Fixing ..."
-                        sh "./copa patch -i aravindh05/devscops_testing_frontend -r patch.json -t 1-patched --addr docker-container://buildkitd"
+                    // Extract line with 'Total'
+                    def totalLine = scanOutput.readLines().find { it.contains('Total') }
+
+                    // Parse the total number of vulnerabilities
+                    if (totalLine) {
+                        def vulnCount = totalLine.replaceAll(/[^0-9]/, "").toInteger()
+                        echo "Total vulnerabilities found: ${vulnCount}"
+                        if (vulnCount >= 1) {
+                            error("Build failed: Found ${vulnCount} OS-level vulnerabilities.")
+                        } else {
+                            echo "No OS vulnerabilities found. Proceeding..."
+                        }
                     } else {
-                        echo "NO Patch Container"
+                            echo "No vulnerability summary line found. Assuming 0."
                     }
                 }
             }
-        }   
+        }
+        
+
 
         stage('DOCKER RUNNING') {
             steps {
