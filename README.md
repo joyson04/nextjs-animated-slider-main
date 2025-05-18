@@ -11,8 +11,6 @@ Check out a [live demo](https://nextjs-animated-slider.vercel.app/).
 ![devscops drawio](https://github.com/user-attachments/assets/f681c302-18f6-498b-aae8-6cc57426df89)
 
 
-![Screenshot 2025-05-13 133540](https://github.com/user-attachments/assets/f2e7d1e0-c576-4064-8e78-84a32d22464d)
-
 
 ## 📦 Installation
 
