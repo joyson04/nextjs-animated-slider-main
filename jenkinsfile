@@ -7,6 +7,10 @@ pipeline {
 
     environment {
         SONAR_HOME = tool 'sonar-scanner'
+        AWS_DEFAULT_REGION = 'us-east-1'
+        // Use Jenkins credentials ID 
+        AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
     }
 
 
@@ -274,6 +278,41 @@ pipeline {
                         echo "ZAP reported alerts. Continuing pipeline but marking as UNSTABLE."
                         currentBuild.result = 'UNSTABLE'
                     }
+                }
+            }
+        }
+
+         stage('Install System Dependencies') {
+            steps {
+                sh '''
+                    sudo apt-get update
+                    sudo apt-get install -y python3-poetry python3-pip unzip jq awscli
+                '''
+            }
+        }
+
+        stage('Clone Prowler') {
+            steps {
+                git branch: 'main', url: 'https://github.com/prowler-cloud/prowler.git'
+            }
+        }
+
+        stage('Install Python Dependencies with Poetry') {
+            steps {
+                dir('prowler') {
+                    sh '''
+                        poetry install
+                    '''
+                }
+            }
+        }
+
+        stage('Run Prowler with Poetry') {
+            steps {
+                dir('prowler') {
+                    sh '''
+                        poetry run python3 prowler-cli.py aws --services ec2
+                    '''
                 }
             }
         }
