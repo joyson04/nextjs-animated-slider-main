@@ -14,10 +14,11 @@ phases:
       - npm install
 
       - echo " Installing security tools"
-      - npm install -g snyk
       - curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
       - curl -sSLo hadolint https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64
       - chmod +x hadolint && mv hadolint /usr/local/bin/
+      - curl -Lo snyk https://github.com/snyk/snyk/releases/latest/download/snyk-linux
+      - chmod +x snyk && mv hadolint /usr/local/bin/
 
       - echo " Authenticating Snyk"
       - snyk auth $SNYK_TOKEN
@@ -57,7 +58,9 @@ phases:
     commands:
       - echo " Generating Snyk JSON report"
       - snyk test --json > snyk-report.json || true
-      - snyk monitor
+
+      - echo "📡 Sending snapshot to Snyk for monitoring"
+      - snyk monitor || true
 
       - echo " Running OWASP ZAP baseline DAST scan"
       - docker run -u zap -v $(pwd):/zap/wrk/:rw --network="host" -t zaproxy/zap-weekly zap-api-scan.py \
