@@ -1,0 +1,47 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<analysisReport plugin="analysis-model-api@13.2.0">
+  <id>-</id>
+  <name>-</name>
+  <originReportFile>-</originReportFile>
+  <icon></icon>
+  <parserId>-</parserId>
+  <elementType>WARNING</elementType>
+  <subReports>
+    <analysisReport>
+      <id>snyk-container</id>
+      <name>Snyk Container</name>
+      <originReportFile>-</originReportFile>
+      <icon></icon>
+      <parserId>-</parserId>
+      <elementType>WARNING</elementType>
+      <subReports/>
+      <elements class="linked-hash-set"/>
+      <infoMessages>
+        <string>Searching for all files in &apos;/var/lib/jenkins/workspace/Devsecops&apos; that match the pattern &apos;results-container.sarif&apos;</string>
+        <string>Traversing of symbolic links: enabled</string>
+        <string>Skipping post processing</string>
+        <string>No filter has been set, publishing all 0 issues</string>
+        <string>Repository miner is not configured, skipping repository mining</string>
+      </infoMessages>
+      <errorMessages>
+        <string>Errors during parsing</string>
+        <string>No files found for pattern &apos;results-container.sarif&apos;. Configuration error?</string>
+      </errorMessages>
+      <countersByKey/>
+      <duplicatesSize>0</duplicatesSize>
+    </analysisReport>
+  </subReports>
+  <elements class="linked-hash-set"/>
+  <infoMessages>
+    <string>Reference build recorder is not configured</string>
+    <string>No valid reference build found</string>
+    <string>All reported issues will be considered outstanding</string>
+    <string>No quality gates have been set - skipping</string>
+    <string>Health report is disabled - skipping</string>
+    <string>Created analysis result for 0 issues (found 0 new issues, fixed 0 issues)</string>
+    <string>Attaching ResultAction with ID &apos;snyk-container&apos; to build &apos;Devsecops #23&apos;.</string>
+  </infoMessages>
+  <errorMessages/>
+  <countersByKey/>
+  <duplicatesSize>0</duplicatesSize>
+</analysisReport>

@@ -1,0 +1,1453 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-build plugin="workflow-job@1520.v56d65e3b_4566">
+  <actions>
+    <hudson.model.CauseAction>
+      <causeBag class="linked-hash-map">
+        <entry>
+          <hudson.model.Cause_-UserIdCause>
+            <userId>aravindh</userId>
+          </hudson.model.Cause_-UserIdCause>
+          <int>1</int>
+        </entry>
+      </causeBag>
+    </hudson.model.CauseAction>
+    <jenkins.metrics.impl.TimeInQueueAction plugin="metrics@4.2.30-471.v55fa_495f2b_f5">
+      <queuingDurationMillis>2</queuingDurationMillis>
+      <blockedDurationMillis>0</blockedDurationMillis>
+      <buildableDurationMillis>0</buildableDurationMillis>
+      <waitingDurationMillis>1</waitingDurationMillis>
+    </jenkins.metrics.impl.TimeInQueueAction>
+    <org.jenkinsci.plugins.workflow.libs.LibrariesAction plugin="pipeline-groovy-lib@752.vdddedf804e72">
+      <libraries/>
+    </org.jenkinsci.plugins.workflow.libs.LibrariesAction>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.ExecutionModelAction plugin="pipeline-model-definition@2.2255.v56a_15e805f12">
+      <stagesUUID>2e55b50c-b0b2-4574-9341-0e3f4db0268d</stagesUUID>
+      <pipelineDefs>
+        <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTPipelineDef plugin="pipeline-model-api@2.2255.v56a_15e805f12">
+          <stages>
+            <stages>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+                <name>GIT</name>
+                <branches>
+                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                    <name>default</name>
+                    <steps>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                        <name>git</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>branch</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">main</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>url</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">https://github.com/joyson04/nextjs-animated-slider-main.git</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                    </steps>
+                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                </branches>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+                <name>Depency Nodejs</name>
+                <branches>
+                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                    <name>default</name>
+                    <steps>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                        <name>sh</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>script</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">yarn install</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                    </steps>
+                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                </branches>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+                <name>Sonarscanner Analayse</name>
+                <branches>
+                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                    <name>default</name>
+                    <steps>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTTreeStep>
+                        <name>withSonarQubeEnv</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTSingleArgument">
+                          <value class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue$ConstantValue">
+                            <value class="string">sonar-server</value>
+                          </value>
+                        </args>
+                        <children>
+                          <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                            <name>sh</name>
+                            <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                              <arguments class="linked-hash-map">
+                                <entry>
+                                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                    <key>script</key>
+                                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                    <value class="string">
+                            $SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=nextjs-animated-slider                             -Dsonar.projectKey=nextjs-animated-slider                             -Dsonar.sources=.                             -Dsonar.inclusions=**/*.js,**/*.tsx
+                        </value>
+                                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                </entry>
+                              </arguments>
+                            </args>
+                          </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                          <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                            <name>sh</name>
+                            <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                              <arguments class="linked-hash-map">
+                                <entry>
+                                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                    <key>script</key>
+                                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                    <value class="string">echo $SONAR_HOME</value>
+                                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                </entry>
+                              </arguments>
+                            </args>
+                          </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                        </children>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTTreeStep>
+                    </steps>
+                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                </branches>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+                <name>Quality Gate check</name>
+                <branches>
+                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                    <name>default</name>
+                    <steps>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTTreeStep>
+                        <name>timeout</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>time</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="int">1</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>unit</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">HOURS</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                        <children>
+                          <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                            <name>waitForQualityGate</name>
+                            <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                              <arguments class="linked-hash-map">
+                                <entry>
+                                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                    <key>abortPipeline</key>
+                                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                    <value class="boolean">true</value>
+                                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                </entry>
+                              </arguments>
+                            </args>
+                          </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                        </children>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTTreeStep>
+                    </steps>
+                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                </branches>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+                <name>OWASP Dependency Track</name>
+                <branches>
+                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                    <name>default</name>
+                    <steps>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                        <name>dependencyCheck</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>additionalArguments</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">--scan . </value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>odcInstallation</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">owasp</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                        <name>dependencyCheckPublisher</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>pattern</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">**/dependency-check-report.xml</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                    </steps>
+                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                </branches>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+                <name>SNYK Latest Download</name>
+                <branches>
+                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                    <name>default</name>
+                    <steps>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                        <name>script</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>scriptBlock</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">sh &quot;curl -Lo snyk https://github.com/snyk/snyk/releases/latest/download/snyk-linux&quot;
+                    sh &quot;curl -O -s -L https://github.com/snyk/cli/releases/download/v1.1296.2/snyk-linux.sha256&quot;
+                    sh &quot;shasum snyk-linux.sha256&quot;
+                    sh &quot;chmod +x snyk&quot;
+                    sh &quot;./snyk --version&quot;</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                    </steps>
+                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                </branches>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+                <name>hadolint Latest Download</name>
+                <branches>
+                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                    <name>default</name>
+                    <steps>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                        <name>script</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>scriptBlock</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">sh &quot;curl -Lo hadolint https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64&quot;
+                    sh &quot;curl -O -s -L https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64.sha256&quot;
+                    sh &quot;shasum hadolint-Linux-x86_64.sha256&quot;
+                    sh &quot;chmod +x hadolint&quot;
+                    sh &quot;./hadolint --version&quot;</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                    </steps>
+                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                </branches>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+                <name>SNYK AUTH</name>
+                <branches>
+                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                    <name>default</name>
+                    <steps>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTTreeStep>
+                        <name>withCredentials</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTSingleArgument">
+                          <value class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue$GStringValue">
+                            <value class="string">${[string(credentialsId: &apos;orgination-Snyk-API-Token&apos;, variable: &apos;SNYK_TOKEN&apos;)]}</value>
+                          </value>
+                        </args>
+                        <children>
+                          <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                            <name>sh</name>
+                            <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                              <arguments class="linked-hash-map">
+                                <entry>
+                                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                    <key>script</key>
+                                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-GStringValue>
+                                    <value class="string">&quot;./snyk auth ${SNYK_TOKEN}&quot;</value>
+                                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-GStringValue>
+                                </entry>
+                              </arguments>
+                            </args>
+                          </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                        </children>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTTreeStep>
+                    </steps>
+                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                </branches>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+                <name>Snyk Code</name>
+                <branches>
+                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                    <name>default</name>
+                    <steps>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTTreeStep>
+                        <name>catchError</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>buildResult</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">SUCCESS</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>stageResult</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">FAILURE</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                        <children>
+                          <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                            <name>sh</name>
+                            <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                              <arguments class="linked-hash-map">
+                                <entry>
+                                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                    <key>script</key>
+                                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                    <value class="string">./snyk code test --sarif-file-output=results-code.sarif</value>
+                                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                </entry>
+                              </arguments>
+                            </args>
+                          </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                        </children>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTTreeStep>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                        <name>recordIssues</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>sourceCodeRetention</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">LAST_BUILD</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>tools</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-GStringValue>
+                                <value class="string">${[sarif(id: &apos;snyk-container&apos;, name: &apos;Snyk Container&apos;, pattern: &apos;results-container.sarif&apos;)]}</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-GStringValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                    </steps>
+                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                </branches>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+                <name>SNYK Test</name>
+                <branches>
+                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                    <name>default</name>
+                    <steps>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTTreeStep>
+                        <name>withCredentials</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTSingleArgument">
+                          <value class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue$GStringValue">
+                            <value class="string">${[string(credentialsId: &apos;orgination-Snyk-API-Token&apos;, variable: &apos;SNYK_TOKEN&apos;)]}</value>
+                          </value>
+                        </args>
+                        <children>
+                          <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                            <name>script</name>
+                            <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                              <arguments class="linked-hash-map">
+                                <entry>
+                                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                    <key>scriptBlock</key>
+                                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                    <value class="string">def snykStatus = sh(script: &quot;./snyk test &quot;, returnStatus: true)
+                        if (snykStatus != 0) {
+                            echo &quot;./Snyk test reported issues (exit code ${snykStatus})&quot;
+                            // Optionally set build as unstable or failed
+                            currentBuild.result = &apos;UNSTABLE&apos;
+                        } else {
+                            echo &quot;Snyk test passed cleanly&quot;
+                        }</value>
+                                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                </entry>
+                              </arguments>
+                            </args>
+                          </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                        </children>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTTreeStep>
+                    </steps>
+                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                </branches>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+                <name>SNYK Monitoring</name>
+                <branches>
+                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                    <name>default</name>
+                    <steps>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTTreeStep>
+                        <name>withCredentials</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTSingleArgument">
+                          <value class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue$GStringValue">
+                            <value class="string">${[string(credentialsId: &apos;orgination-Snyk-API-Token&apos;, variable: &apos;SNYK_TOKEN&apos;)]}</value>
+                          </value>
+                        </args>
+                        <children>
+                          <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                            <name>script</name>
+                            <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                              <arguments class="linked-hash-map">
+                                <entry>
+                                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                    <key>scriptBlock</key>
+                                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                    <value class="string">def snykStatusm = sh(script: &quot;./snyk monitor&quot;, returnStatus: true)
+                        if (snykStatusm != 0) {
+                            error(&quot;Snyk monitor failed (exit code ${snykStatusm})&quot;)
+                        } else {
+                            echo &quot;Snyk monitoring successful&quot;
+                        }</value>
+                                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                </entry>
+                              </arguments>
+                            </args>
+                          </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                        </children>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTTreeStep>
+                    </steps>
+                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                </branches>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+                <name>hadolint (report only)</name>
+                <branches>
+                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                    <name>default</name>
+                    <steps>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                        <name>script</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>scriptBlock</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">def result = sh(script: &apos;./hadolint --failure-threshold error Dockerfile&apos;, returnStatus: true)
+                    if (result != 0) {
+                        echo &apos;Hadolint found issues, but proceeding...&apos;
+                    }</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                    </steps>
+                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                </branches>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+                <name>hadolint custom severity levels</name>
+                <branches>
+                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                    <name>default</name>
+                    <steps>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                        <name>sh</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>script</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string"> ./hadolint  --error DL3018 --warning DL3013 --info DL3025 Dockerfile </value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                    </steps>
+                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                </branches>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+                <name>Trivy Image Scan</name>
+                <branches>
+                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                    <name>default</name>
+                    <steps>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                        <name>sh</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>script</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string"> trivy image --scanners vuln --format table -o image.html aravindh05/devscops_testing_frontend </value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                    </steps>
+                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                </branches>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+                <name>Docker-Scout Latest Download</name>
+                <branches>
+                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                    <name>default</name>
+                    <steps>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                        <name>script</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>scriptBlock</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">sh &quot;wget https://github.com/docker/scout-cli/releases/download/v1.17.1/docker-scout_1.17.1_linux_amd64.tar.gz&quot;
+                    sh &quot;tar -xvf  docker-scout_1.17.1_linux_amd64.tar.gz.1&quot;
+                    sh &quot;chmod +x docker-scout&quot;
+                    sh &quot;./docker-scout version&quot;</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                    </steps>
+                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                </branches>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+                <name>Docker-Scout CVES Scan</name>
+                <branches>
+                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                    <name>default</name>
+                    <steps>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTTreeStep>
+                        <name>withCredentials</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTSingleArgument">
+                          <value class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue$GStringValue">
+                            <value class="string">${[usernamePassword(credentialsId: &apos;hub-docker&apos;, usernameVariable: &apos;DOCKER_USER&apos;, passwordVariable: &apos;DOCKER_PASS&apos;)]}</value>
+                          </value>
+                        </args>
+                        <children>
+                          <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                            <name>sh</name>
+                            <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                              <arguments class="linked-hash-map">
+                                <entry>
+                                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                    <key>script</key>
+                                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                    <value class="string">echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin</value>
+                                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                </entry>
+                              </arguments>
+                            </args>
+                          </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                        </children>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTTreeStep>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                        <name>sh</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>script</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string"> ./docker-scout cves aravindh05/devscops_testing_frontend </value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                    </steps>
+                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                </branches>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+                <name>Trivy OS Patch</name>
+                <branches>
+                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                    <name>default</name>
+                    <steps>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                        <name>sh</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>script</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string"> trivy image --vuln-type os --ignore-unfixed -f json --output patch.json  aravindh05/devscops_testing_frontend </value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                    </steps>
+                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                </branches>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+                <name>copa Install</name>
+                <branches>
+                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                    <name>default</name>
+                    <steps>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                        <name>sh</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>script</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">docker rm -f buildkitd || true</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                        <name>sh</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>script</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">docker run -d --name buildkitd --privileged moby/buildkit:latest</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                        <name>sh</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>script</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">wget https://github.com/project-copacetic/copacetic/releases/download/v0.10.0/copa_0.10.0_linux_amd64.tar.gz</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                        <name>sh</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>script</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">tar -xvf copa_0.10.0_linux_amd64.tar.gz</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                        <name>sh</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>script</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">chmod +x copa</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                        <name>sh</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>script</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">./copa --version</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                    </steps>
+                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                </branches>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+                <name>Trivy Scan OS</name>
+                <branches>
+                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                    <name>default</name>
+                    <steps>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                        <name>script</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>scriptBlock</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">def imageName = &quot;aravindh05/devscops_testing_frontend&quot;
+                    echo &quot;Scanning Docker image: ${imageName}&quot;
+
+                    // Run Trivy and capture the output
+                    def scanOutput = sh(script: &quot;trivy image --quiet --vuln-type os --ignore-unfixed ${imageName}&quot;, returnStdout: true)
+
+                    // Extract line with &apos;Total&apos;
+                    def totalLine = scanOutput.readLines().find { it.contains(&apos;Total&apos;) }
+
+                    // Parse the total number of vulnerabilities
+                    if (totalLine) {
+                        def vulnCount = totalLine.replaceAll(/[^0-9]/, &quot;&quot;).toInteger()
+                        echo &quot;Total vulnerabilities found: ${vulnCount}&quot;
+                        if (vulnCount &gt;= 1) {
+                            error(&quot;Build failed: Found ${vulnCount} OS-level vulnerabilities.&quot;)
+                        } else {
+                            echo &quot;No OS vulnerabilities found. Proceeding...&quot;
+                        }
+                    } else {
+                            echo &quot;No vulnerability summary line found. Assuming 0.&quot;
+                    }</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                    </steps>
+                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                </branches>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+                <name>DOCKER RUNNING</name>
+                <branches>
+                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                    <name>default</name>
+                    <steps>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                        <name>script</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>scriptBlock</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">sh &apos;docker rm -f react-app || true&apos;
+
+                    // Pull and run the Docker image
+                    withDockerRegistry(credentialsId: &apos;hub-docker&apos;) {
+                        sh &quot;docker run -d --name react-app -p 3000:3000 aravindh05/devscops_testing_frontend&quot;
+                    }
+
+                    // Optional: Verify the container is running
+                    def dockerStatus = sh(script: &apos;docker ps -f name=react-app --format &quot;{{.Names}}&quot;&apos;, returnStdout: true).trim()
+                    if (dockerStatus != &apos;react-app&apos;) {
+                        error(&quot;Docker container did not start properly.&quot;)
+                    }</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                    </steps>
+                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                </branches>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+                <name>Run ZAP API Scan</name>
+                <branches>
+                  <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                    <name>default</name>
+                    <steps>
+                      <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                        <name>script</name>
+                        <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                          <arguments class="linked-hash-map">
+                            <entry>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                                <key>scriptBlock</key>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                                <value class="string">def targetUrl = &quot;http://localhost:3000&quot;
+                    def currentDir = sh(script: &apos;pwd&apos;, returnStdout: true).trim()
+
+                    def zapExitCode = sh(
+                    script: &quot;&quot;&quot;
+                        echo &quot;Running ZAP scan against: ${targetUrl}&quot;
+                        docker run -v ${currentDir}:/zap/wrk/:rw --network=&quot;host&quot; -t zaproxy/zap-weekly zap-api-scan.py -t ${targetUrl}/api-docs -f openapi -r /tmp/scan_zap_report.html 
+                    &quot;&quot;&quot;,
+                    returnStatus: true
+                    )
+
+                    echo &quot;ZAP scan finished with exit code: ${zapExitCode}&quot;
+                    if (zapExitCode &gt; 0) {
+                        echo &quot;ZAP reported alerts. Continuing pipeline but marking as UNSTABLE.&quot;
+                        currentBuild.result = &apos;UNSTABLE&apos;
+                    }</value>
+                              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                            </entry>
+                          </arguments>
+                        </args>
+                      </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                    </steps>
+                  </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                </branches>
+              </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+            </stages>
+            <uuid>2e55b50c-b0b2-4574-9341-0e3f4db0268d</uuid>
+          </stages>
+          <environment>
+            <variables class="linked-hash-map">
+              <entry>
+                <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                  <key>SONAR_HOME</key>
+                </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-GStringValue>
+                  <value class="string">${&apos;sonar-scanner&apos;}</value>
+                </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-GStringValue>
+              </entry>
+            </variables>
+          </environment>
+          <agent>
+            <agentType>
+              <key>any</key>
+            </agentType>
+          </agent>
+          <tools>
+            <tools class="linked-hash-map">
+              <entry>
+                <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                  <key>nodejs</key>
+                </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                  <value class="string">node</value>
+                </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+              </entry>
+            </tools>
+          </tools>
+        </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTPipelineDef>
+      </pipelineDefs>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.ExecutionModelAction>
+    <hudson.plugins.git.util.BuildData plugin="git@5.7.0">
+      <buildsByBranchName>
+        <entry>
+          <string>refs/remotes/origin/main</string>
+          <hudson.plugins.git.util.Build>
+            <marked plugin="git-client@6.1.3">
+              <sha1>a634831a0bbdd80f41bd2f13136308c4f8b2ad42</sha1>
+              <branches class="list">
+                <hudson.plugins.git.Branch>
+                  <sha1 reference="../../../sha1"/>
+                  <name>refs/remotes/origin/main</name>
+                </hudson.plugins.git.Branch>
+              </branches>
+            </marked>
+            <revision reference="../marked"/>
+            <hudsonBuildNumber>23</hudsonBuildNumber>
+          </hudson.plugins.git.util.Build>
+        </entry>
+      </buildsByBranchName>
+      <lastBuild reference="../buildsByBranchName/entry/hudson.plugins.git.util.Build"/>
+      <remoteUrls>
+        <string>https://github.com/joyson04/nextjs-animated-slider-main.git</string>
+      </remoteUrls>
+    </hudson.plugins.git.util.BuildData>
+    <org.jenkinsci.plugins.workflow.steps.scm.MultiSCMRevisionState plugin="workflow-scm-step@437.v05a_f66b_e5ef8">
+      <revisionStates>
+        <entry>
+          <string>git https://github.com/joyson04/nextjs-animated-slider-main.git</string>
+          <hudson.scm.SCMRevisionState_-None/>
+        </entry>
+      </revisionStates>
+    </org.jenkinsci.plugins.workflow.steps.scm.MultiSCMRevisionState>
+    <com.cloudbees.plugins.credentials.builds.CredentialsParameterBinder plugin="credentials@1415.v831096eb_5534">
+      <boundCredentials class="concurrent-hash-map"/>
+    </com.cloudbees.plugins.credentials.builds.CredentialsParameterBinder>
+    <hudson.plugins.sonar.action.SonarMarkerAction plugin="sonar@2.18"/>
+    <hudson.plugins.sonar.action.SonarAnalysisAction plugin="sonar@2.18">
+      <installationName>sonar-server</installationName>
+      <installationUrl>http://192.168.174.131:9000</installationUrl>
+      <ceTaskId>AZapb-1CgrTq4Zf8LUsX</ceTaskId>
+      <url>http://192.168.174.131:9000/dashboard?id=nextjs-animated-slider</url>
+      <serverUrl>http://192.168.174.131:9000</serverUrl>
+      <isNew>true</isNew>
+      <isSkipped>false</isSkipped>
+    </hudson.plugins.sonar.action.SonarAnalysisAction>
+    <hudson.plugins.sonar.client.ProjectInformation plugin="sonar@2.18">
+      <created>1746599409631</created>
+      <name>nextjs-animated-slider</name>
+      <url>http://192.168.174.131:9000/dashboard?id=nextjs-animated-slider</url>
+      <status>OK</status>
+      <ceStatus>success</ceStatus>
+    </hudson.plugins.sonar.client.ProjectInformation>
+    <org.jenkinsci.plugins.DependencyCheck.ResultAction plugin="dependency-check-jenkins-plugin@5.6.1"/>
+    <org.jenkinsci.plugins.workflow.cps.EnvActionImpl plugin="workflow-cps@4106.v7a_8a_8176d450">
+      <env class="tree-map"/>
+    </org.jenkinsci.plugins.workflow.cps.EnvActionImpl>
+    <org.jenkinsci.plugins.workflow.cps.view.InterpolatedSecretsAction plugin="workflow-cps@4106.v7a_8a_8176d450">
+      <interpolatedWarnings>
+        <org.jenkinsci.plugins.workflow.cps.view.InterpolatedSecretsAction_-InterpolatedWarnings>
+          <stepName>sh</stepName>
+          <interpolatedVariables>
+            <string>SNYK_TOKEN</string>
+          </interpolatedVariables>
+        </org.jenkinsci.plugins.workflow.cps.view.InterpolatedSecretsAction_-InterpolatedWarnings>
+      </interpolatedWarnings>
+    </org.jenkinsci.plugins.workflow.cps.view.InterpolatedSecretsAction>
+    <io.jenkins.plugins.analysis.core.model.AggregationAction plugin="warnings-ng@12.5.0"/>
+    <io.jenkins.plugins.analysis.core.model.ResultAction plugin="warnings-ng@12.5.0">
+      <result>
+        <id>snyk-container</id>
+        <parserId>-</parserId>
+        <totals>
+          <totalErrorSize>0</totalErrorSize>
+          <totalHighSize>0</totalHighSize>
+          <totalNormalSize>0</totalNormalSize>
+          <totalLowSize>0</totalLowSize>
+          <totalModifiedSize>0</totalModifiedSize>
+          <newErrorSize>0</newErrorSize>
+          <newHighSize>0</newHighSize>
+          <newNormalSize>0</newNormalSize>
+          <newLowSize>0</newLowSize>
+          <newModifiedSize>0</newModifiedSize>
+          <deltaErrorSize>0</deltaErrorSize>
+          <deltaHighSize>0</deltaHighSize>
+          <deltaNormalSize>0</deltaNormalSize>
+          <deltaLowSize>0</deltaLowSize>
+          <fixedSize>0</fixedSize>
+          <totalSizeBySeverity>
+            <entry>
+              <edu.hm.hafner.analysis.Severity plugin="analysis-model-api@13.2.0">
+                <name>HIGH</name>
+              </edu.hm.hafner.analysis.Severity>
+              <int>0</int>
+            </entry>
+            <entry>
+              <edu.hm.hafner.analysis.Severity plugin="analysis-model-api@13.2.0">
+                <name>LOW</name>
+              </edu.hm.hafner.analysis.Severity>
+              <int>0</int>
+            </entry>
+            <entry>
+              <edu.hm.hafner.analysis.Severity plugin="analysis-model-api@13.2.0">
+                <name>ERROR</name>
+              </edu.hm.hafner.analysis.Severity>
+              <int>0</int>
+            </entry>
+            <entry>
+              <edu.hm.hafner.analysis.Severity plugin="analysis-model-api@13.2.0">
+                <name>NORMAL</name>
+              </edu.hm.hafner.analysis.Severity>
+              <int>0</int>
+            </entry>
+          </totalSizeBySeverity>
+          <newSizeBySeverity>
+            <entry>
+              <edu.hm.hafner.analysis.Severity reference="../../../totalSizeBySeverity/entry/edu.hm.hafner.analysis.Severity"/>
+              <int>0</int>
+            </entry>
+            <entry>
+              <edu.hm.hafner.analysis.Severity reference="../../../totalSizeBySeverity/entry[2]/edu.hm.hafner.analysis.Severity"/>
+              <int>0</int>
+            </entry>
+            <entry>
+              <edu.hm.hafner.analysis.Severity reference="../../../totalSizeBySeverity/entry[3]/edu.hm.hafner.analysis.Severity"/>
+              <int>0</int>
+            </entry>
+            <entry>
+              <edu.hm.hafner.analysis.Severity reference="../../../totalSizeBySeverity/entry[4]/edu.hm.hafner.analysis.Severity"/>
+              <int>0</int>
+            </entry>
+          </newSizeBySeverity>
+        </totals>
+        <sizePerOrigin>
+          <entry>
+            <string>snyk-container</string>
+            <int>0</int>
+          </entry>
+        </sizePerOrigin>
+        <errors>
+          <string>Errors during parsing</string>
+          <string>No files found for pattern &apos;results-container.sarif&apos;. Configuration error?</string>
+        </errors>
+        <messages>
+          <string>Searching for all files in &apos;/var/lib/jenkins/workspace/Devsecops&apos; that match the pattern &apos;results-container.sarif&apos;</string>
+          <string>Traversing of symbolic links: enabled</string>
+          <string>Skipping post processing</string>
+          <string>No filter has been set, publishing all 0 issues</string>
+          <string>Repository miner is not configured, skipping repository mining</string>
+          <string>Reference build recorder is not configured</string>
+          <string>No valid reference build found</string>
+          <string>All reported issues will be considered outstanding</string>
+          <string>No quality gates have been set - skipping</string>
+          <string>Health report is disabled - skipping</string>
+          <string>Created analysis result for 0 issues (found 0 new issues, fixed 0 issues)</string>
+          <string>Attaching ResultAction with ID &apos;snyk-container&apos; to build &apos;Devsecops #23&apos;.</string>
+        </messages>
+        <referenceBuildId></referenceBuildId>
+        <noIssuesSinceBuild>18</noIssuesSinceBuild>
+        <successfulSinceBuild>-1</successfulSinceBuild>
+        <qualityGateResult plugin="plugin-util-api@6.1.0">
+          <overallStatus>INACTIVE</overallStatus>
+          <items/>
+        </qualityGateResult>
+      </result>
+      <healthDescriptor>
+        <healthy>0</healthy>
+        <unhealthy>0</unhealthy>
+        <minimumSeverity reference="../../result/totals/totalSizeBySeverity/entry[2]/edu.hm.hafner.analysis.Severity"/>
+      </healthDescriptor>
+      <id>snyk-container</id>
+      <name>Snyk Container</name>
+      <icon></icon>
+      <charset>UTF-8</charset>
+      <trendChartType>AGGREGATION_TOOLS</trendChartType>
+    </io.jenkins.plugins.analysis.core.model.ResultAction>
+    <jenkins.metrics.impl.SubTaskTimeInQueueAction plugin="metrics@4.2.30-471.v55fa_495f2b_f5">
+      <queuingDurationMillis>3</queuingDurationMillis>
+      <blockedDurationMillis>0</blockedDurationMillis>
+      <buildableDurationMillis>1</buildableDurationMillis>
+      <waitingDurationMillis>0</waitingDurationMillis>
+      <executingDurationMillis>389432</executingDurationMillis>
+      <workUnitCount>1</workUnitCount>
+    </jenkins.metrics.impl.SubTaskTimeInQueueAction>
+  </actions>
+  <queueId>35</queueId>
+  <timestamp>1746599386030</timestamp>
+  <startTime>1746599386033</startTime>
+  <result>UNSTABLE</result>
+  <duration>389934</duration>
+  <charset>UTF-8</charset>
+  <keepLog>false</keepLog>
+  <execution class="org.jenkinsci.plugins.workflow.cps.CpsFlowExecution">
+    <result>SUCCESS</result>
+    <script>pipeline {
+    agent any
+
+    tools {
+        nodejs &quot;node&quot;
+    }
+
+    environment {
+        SONAR_HOME = tool &apos;sonar-scanner&apos;
+    }
+
+
+    stages {
+        stage(&apos;GIT&apos;) {
+            steps {
+                git branch: &apos;main&apos;, url: &apos;https://github.com/joyson04/nextjs-animated-slider-main.git&apos;
+            }
+        }
+
+        stage(&apos;Depency Nodejs&apos;) {
+            steps {
+                sh &quot;yarn install&quot;
+            }
+        }
+
+        stage(&apos;Sonarscanner Analayse&apos;) {
+            steps {
+               withSonarQubeEnv(&apos;sonar-server&apos;) {
+                    sh  &apos;&apos;&apos;
+                            $SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=nextjs-animated-slider \
+                            -Dsonar.projectKey=nextjs-animated-slider \
+                            -Dsonar.sources=. \
+                            -Dsonar.inclusions=**/*.js,**/*.tsx
+                        &apos;&apos;&apos;
+                    sh &apos;echo $SONAR_HOME&apos;
+               }
+            }
+        }
+
+       
+        stage(&apos;Quality Gate check&apos;) {
+            steps {
+               timeout(time: 1, unit: &apos;HOURS&apos;) {
+                    waitForQualityGate abortPipeline: true //pipeline cloudn&apos;t break
+                }
+            }
+        }
+
+        
+        stage(&apos;OWASP Dependency Track&apos;) {
+            steps {
+                dependencyCheck additionalArguments: &apos;--scan . &apos;, odcInstallation: &apos;owasp&apos;
+                    dependencyCheckPublisher pattern: &apos;**/dependency-check-report.xml&apos;
+            }
+        }
+
+        stage(&apos;SNYK Latest Download&apos;) {
+            steps {
+                script {
+                    sh &quot;curl -Lo snyk https://github.com/snyk/snyk/releases/latest/download/snyk-linux&quot;
+                    sh &quot;curl -O -s -L https://github.com/snyk/cli/releases/download/v1.1296.2/snyk-linux.sha256&quot;
+                    sh &quot;shasum snyk-linux.sha256&quot;
+                    sh &quot;chmod +x snyk&quot;
+                    sh &quot;./snyk --version&quot;
+                }
+            }
+        }
+
+
+        stage(&apos;hadolint Latest Download&apos;) {
+            steps {
+                script {
+                    sh &quot;curl -Lo hadolint https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64&quot;
+                    sh &quot;curl -O -s -L https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64.sha256&quot;
+                    sh &quot;shasum hadolint-Linux-x86_64.sha256&quot;
+                    sh &quot;chmod +x hadolint&quot;
+                    sh &quot;./hadolint --version&quot;
+                }
+            }
+        }
+
+        stage(&apos;SNYK AUTH&apos;) {
+            steps {
+                withCredentials([string(credentialsId: &apos;orgination-Snyk-API-Token&apos;, variable: &apos;SNYK_TOKEN&apos;)]) {
+                    sh &quot;./snyk auth ${SNYK_TOKEN}&quot;
+                }
+            }
+        }
+
+
+        stage(&apos;Snyk Code&apos;) {
+            steps {
+                catchError(buildResult: &apos;SUCCESS&apos;, stageResult: &apos;FAILURE&apos;) {
+                    sh &apos;./snyk code test --sarif-file-output=results-code.sarif&apos;
+                }
+                recordIssues sourceCodeRetention: &apos;LAST_BUILD&apos;, tools: [sarif(id: &apos;snyk-container&apos;, name: &apos;Snyk Container&apos;, pattern: &apos;results-container.sarif&apos;)]
+            }
+        }
+
+
+        stage(&apos;SNYK Test&apos;) {
+            steps {
+                withCredentials([string(credentialsId: &apos;orgination-Snyk-API-Token&apos;, variable: &apos;SNYK_TOKEN&apos;)]) {
+                    script {
+                        def snykStatus = sh(script: &quot;./snyk test &quot;, returnStatus: true)
+                        if (snykStatus != 0) {
+                            echo &quot;./Snyk test reported issues (exit code ${snykStatus})&quot;
+                            // Optionally set build as unstable or failed
+                            currentBuild.result = &apos;UNSTABLE&apos;
+                        } else {
+                            echo &quot;Snyk test passed cleanly&quot;
+                        }
+                    }
+                }
+            }
+        }
+  
+        stage(&apos;SNYK Monitoring&apos;) {
+            steps {
+                withCredentials([string(credentialsId: &apos;orgination-Snyk-API-Token&apos;, variable: &apos;SNYK_TOKEN&apos;)]) {
+                    script {
+                        def snykStatusm = sh(script: &quot;./snyk monitor&quot;, returnStatus: true)
+                        if (snykStatusm != 0) {
+                            error(&quot;Snyk monitor failed (exit code ${snykStatusm})&quot;)
+                        } else {
+                            echo &quot;Snyk monitoring successful&quot;
+                        }
+                    }
+                }
+            }
+        }
+
+        stage(&apos;hadolint (report only)&apos;) {
+            steps {
+                script {
+                     // Fail only on error level issues or higher, ignoring warnings
+                    def result = sh(script: &apos;./hadolint --failure-threshold error Dockerfile&apos;, returnStatus: true)
+                    if (result != 0) {
+                        echo &apos;Hadolint found issues, but proceeding...&apos;
+                    } 
+                }
+            }
+        }
+
+        stage(&apos;hadolint custom severity levels&apos;) {
+            steps {
+               sh &quot; ./hadolint  --error DL3018 --warning DL3013 --info DL3025 Dockerfile &quot;
+            }
+        }
+
+
+        stage(&apos;Trivy Image Scan&apos;) {
+            steps {
+               sh &quot; trivy image --scanners vuln --format table -o image.html aravindh05/devscops_testing_frontend &quot;
+            }
+        }
+
+        stage(&apos;Docker-Scout Latest Download&apos;) {
+            steps {
+                script {
+                    sh &quot;wget https://github.com/docker/scout-cli/releases/download/v1.17.1/docker-scout_1.17.1_linux_amd64.tar.gz&quot;
+                    sh &quot;tar -xvf  docker-scout_1.17.1_linux_amd64.tar.gz.1&quot;
+                    sh &quot;chmod +x docker-scout&quot;
+                    sh &quot;./docker-scout version&quot;
+                }
+            }
+        }
+
+        stage(&apos;Docker-Scout CVES Scan&apos;) {
+            steps {
+                withCredentials([usernamePassword(credentialsId: &apos;hub-docker&apos;, usernameVariable: &apos;DOCKER_USER&apos;, passwordVariable: &apos;DOCKER_PASS&apos;)]) {
+                    sh &apos;echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin&apos;
+                }
+
+               sh &quot; ./docker-scout cves aravindh05/devscops_testing_frontend &quot;
+            }
+        }
+
+        stage(&apos;Trivy OS Patch&apos;) {
+            steps {
+               sh &quot; trivy image --vuln-type os --ignore-unfixed -f json --output patch.json  aravindh05/devscops_testing_frontend &quot;
+            }
+        }
+
+        stage(&apos;copa Install&apos;) {
+            steps {
+                
+                // Remove existing container if it exists
+                sh &apos;docker rm -f buildkitd || true&apos;
+                sh &quot;docker run -d --name buildkitd --privileged moby/buildkit:latest&quot;
+                sh &quot;wget https://github.com/project-copacetic/copacetic/releases/download/v0.10.0/copa_0.10.0_linux_amd64.tar.gz&quot;
+                sh &quot;tar -xvf copa_0.10.0_linux_amd64.tar.gz&quot;
+                sh &quot;chmod +x copa&quot;
+                sh &quot;./copa --version&quot;
+            }
+        }
+        
+        
+        stage(&apos;Trivy Scan OS&apos;) {
+            steps {
+                script {
+                    def imageName = &quot;aravindh05/devscops_testing_frontend&quot;
+                    echo &quot;Scanning Docker image: ${imageName}&quot;
+
+                    // Run Trivy and capture the output
+                    def scanOutput = sh(script: &quot;trivy image --quiet --vuln-type os --ignore-unfixed ${imageName}&quot;, returnStdout: true)
+
+                    // Extract line with &apos;Total&apos;
+                    def totalLine = scanOutput.readLines().find { it.contains(&apos;Total&apos;) }
+
+                    // Parse the total number of vulnerabilities
+                    if (totalLine) {
+                        def vulnCount = totalLine.replaceAll(/[^0-9]/, &quot;&quot;).toInteger()
+                        echo &quot;Total vulnerabilities found: ${vulnCount}&quot;
+                        if (vulnCount &gt;= 1) {
+                            error(&quot;Build failed: Found ${vulnCount} OS-level vulnerabilities.&quot;)
+                        } else {
+                            echo &quot;No OS vulnerabilities found. Proceeding...&quot;
+                        }
+                    } else {
+                            echo &quot;No vulnerability summary line found. Assuming 0.&quot;
+                    }
+                }
+            }
+        }
+        
+
+
+        stage(&apos;DOCKER RUNNING&apos;) {
+            steps {
+                script {
+                    // Remove existing container if it exists
+                    sh &apos;docker rm -f react-app || true&apos;
+
+                    // Pull and run the Docker image
+                    withDockerRegistry(credentialsId: &apos;hub-docker&apos;) {
+                        sh &quot;docker run -d --name react-app -p 3000:3000 aravindh05/devscops_testing_frontend&quot;
+                    }
+
+                    // Optional: Verify the container is running
+                    def dockerStatus = sh(script: &apos;docker ps -f name=react-app --format &quot;{{.Names}}&quot;&apos;, returnStdout: true).trim()
+                    if (dockerStatus != &apos;react-app&apos;) {
+                        error(&quot;Docker container did not start properly.&quot;)
+                    }
+                }
+            }
+        }   
+
+        stage(&apos;Run ZAP API Scan&apos;) {
+            steps {
+                script {
+                    def targetUrl = &quot;http://localhost:3000&quot;
+                    def currentDir = sh(script: &apos;pwd&apos;, returnStdout: true).trim()
+
+                    def zapExitCode = sh(
+                    script: &quot;&quot;&quot;
+                        echo &quot;Running ZAP scan against: ${targetUrl}&quot;
+                        docker run -v ${currentDir}:/zap/wrk/:rw --network=&quot;host&quot; -t zaproxy/zap-weekly zap-api-scan.py -t ${targetUrl}/api-docs -f openapi -r /tmp/scan_zap_report.html 
+                    &quot;&quot;&quot;,
+                    returnStatus: true
+                    )
+
+                    echo &quot;ZAP scan finished with exit code: ${zapExitCode}&quot;
+                    if (zapExitCode &gt; 0) {
+                        echo &quot;ZAP reported alerts. Continuing pipeline but marking as UNSTABLE.&quot;
+                        currentBuild.result = &apos;UNSTABLE&apos;
+                    }
+                }
+            }
+        }
+    }
+}
+</script>
+    <loadedScripts class="linked-hash-map"/>
+    <durabilityHint>MAX_SURVIVABILITY</durabilityHint>
+    <timings class="map">
+      <entry>
+        <string>flowNode</string>
+        <long>1581956456</long>
+      </entry>
+      <entry>
+        <string>classLoad</string>
+        <long>515750974</long>
+      </entry>
+      <entry>
+        <string>runQueue</string>
+        <long>7243144707</long>
+      </entry>
+      <entry>
+        <string>run</string>
+        <long>6505910437</long>
+      </entry>
+      <entry>
+        <string>parse</string>
+        <long>78429138</long>
+      </entry>
+      <entry>
+        <string>saveProgram</string>
+        <long>2289865820</long>
+      </entry>
+    </timings>
+    <internalCalls class="sorted-set"/>
+    <sandbox>true</sandbox>
+    <iota>350</iota>
+    <head>1:350</head>
+    <done>true</done>
+    <resumeBlocked>false</resumeBlocked>
+    <storageDir>workflow-completed</storageDir>
+  </execution>
+  <completed>true</completed>
+  <checkouts class="hudson.util.PersistedList">
+    <org.jenkinsci.plugins.workflow.job.WorkflowRun_-SCMCheckout>
+      <scm class="hudson.plugins.git.GitSCM" plugin="git@5.7.0">
+        <configVersion>2</configVersion>
+        <userRemoteConfigs>
+          <hudson.plugins.git.UserRemoteConfig>
+            <url>https://github.com/joyson04/nextjs-animated-slider-main.git</url>
+          </hudson.plugins.git.UserRemoteConfig>
+        </userRemoteConfigs>
+        <branches class="singleton-list">
+          <hudson.plugins.git.BranchSpec>
+            <name>*/main</name>
+          </hudson.plugins.git.BranchSpec>
+        </branches>
+        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+        <submoduleCfg class="empty-list"/>
+        <extensions>
+          <hudson.plugins.git.extensions.impl.LocalBranch>
+            <localBranch>main</localBranch>
+          </hudson.plugins.git.extensions.impl.LocalBranch>
+        </extensions>
+      </scm>
+      <node></node>
+      <workspace>/var/lib/jenkins/workspace/Devsecops</workspace>
+      <changelogFile>/var/lib/jenkins/jobs/Devsecops/builds/23/changelog8725410626884572184.xml</changelogFile>
+      <pollingBaseline class="hudson.scm.SCMRevisionState$None" reference="../../../actions/org.jenkinsci.plugins.workflow.steps.scm.MultiSCMRevisionState/revisionStates/entry/hudson.scm.SCMRevisionState_-None"/>
+    </org.jenkinsci.plugins.workflow.job.WorkflowRun_-SCMCheckout>
+  </checkouts>
+</flow-build>
