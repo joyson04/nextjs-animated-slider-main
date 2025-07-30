@@ -59,14 +59,6 @@ pipeline {
         }
 
         
-        stage('Publish to Nexus NPM Repo') {
-            steps {
-                configFileProvider([configFile(fileId: 'npmrc', targetLocation: '.')]) {
-                    sh "npm publish"
-                }
-            }
-        }
-
         stage('SNYK Latest Download') {
             steps {
                 script {
@@ -286,16 +278,34 @@ pipeline {
             steps {
                 sh '''
                     sudo apt-get update
-                    sudo apt-get install -y python3-poetry python3-pip unzip jq awscli
+                    sudo apt-get install -y python3-poetry python3-pip unzip jq 
                 '''
             }
         }
+
+
+        stage('Install Poetry with pip') {
+            steps {
+                dir('prowler') {
+                    sh '''
+                        curl -sSL https://install.python-poetry.org | python3 -
+                        export PATH="$HOME/.local/bin:$PATH"
+                        source ~/.bashrc  # or ~/.zshrc
+                        echo "Poetry installed at: $(which poetry)"
+                        poetry --version
+                        poetry config virtualenvs.create false  # Use the global Python environment
+                    '''
+                }
+            }
+        }
+
 
         stage('Clone Prowler') {
             steps {
                 git branch: 'main', url: 'https://github.com/prowler-cloud/prowler.git'
             }
         }
+
 
         stage('Install Python Dependencies with Poetry') {
             steps {
@@ -307,6 +317,7 @@ pipeline {
             }
         }
 
+
         stage('Run Prowler with Poetry') {
             steps {
                 dir('prowler') {
@@ -316,5 +327,24 @@ pipeline {
                 }
             }
         }
+        
+        stage('Run Prowler with Poetry') {
+            steps {
+                dir('prowler') {
+                    sh '''
+                        poetry run python3 prowler-cli.py aws --services s3
+                    '''
+                }
+            }
+        }
+
+        stage('Publish to Nexus NPM Repo') {
+            steps {
+                configFileProvider([configFile(fileId: 'npmrc', targetLocation: '.')]) {
+                    sh "npm publish"
+                }
+            }
+        }
+
     }
 }
