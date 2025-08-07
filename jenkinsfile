@@ -337,6 +337,56 @@ pipeline {
                 }
             }
         }
+        
+        stages {
+            stage('Install kube-bench') {
+                steps {
+                    sh '''
+                        curl -L https://github.com/aquasecurity/kube-bench/releases/download/v0.6.2/kube-bench_0.6.2_linux_amd64.deb -o kube-bench_0.6.2_linux_amd64.deb
+                        sudo apt-get update
+                        sudo apt-get install -y ./kube-bench_0.6.2_linux_amd64.deb -f
+                    '''
+                }
+            }
+        }
+
+        stages {
+            stage('Run kube-bench for ETCD') {
+                steps {
+                    script {
+                        def output = sh(script: "kube-bench run --targets etcd --version 1.15 --check 2.2 --json", returnStdout: true).trim()
+                        def totalFail = sh(script: "echo '${output}' | jq '.[] | .total_fail'", returnStdout: true).trim()
+                        if (totalFail != "0") {
+                            echo "CIS Benchmark Failed for ETCD check 2.2 (Failures: ${totalFail})"
+                            error("CIS Benchmark failed")
+                        } else {
+                            echo "CIS Benchmark Passed for ETCD check 2.2"
+                        }
+                    }
+                }  
+            }
+        }
+
+        stages {
+            stage('Run kube-bench for Node checks 4.2.1 and 4.2.2') {
+                steps {
+                    script {
+                        // Run kube-bench and capture the JSON output
+                        def output = sh(script: "kube-bench run --targets node --version 1.15 --check 4.2.1,4.2.2 --json", returnStdout: true).trim()
+
+                        // Extract total_fail values and sum them (handles multiple JSON array items)
+                        def totalFail = sh(script: "echo '${output}' | jq '[.[].total_fail] | add'", returnStdout: true).trim()
+
+                        if (totalFail != "0") {
+                            echo "CIS Benchmark Failed for Node checks 4.2.1 and 4.2.2 (Failures: ${totalFail})"
+                            error("CIS Benchmark failed")
+                        } else {
+                            echo "CIS Benchmark Passed for Node checks 4.2.1 and 4.2.2"
+                        }
+                    }
+                }
+            }
+        }
 
         stage('Publish to Nexus NPM Repo') {
             steps {
