@@ -8,7 +8,8 @@ Stunning animated slider website built using Next.js, Framer Motion, and Tailwin
 
 Check out a [live demo](https://nextjs-animated-slider.vercel.app/).
 
-<img width="1937" height="1057" alt="devscops drawio" src="https://github.com/user-attachments/assets/3ec6a2cf-48f7-494d-a877-02b747bc1a8b" />
+
+<img width="1920" height="1080" alt="New Project (1)" src="https://github.com/user-attachments/assets/f1c4e57c-962a-47aa-ad32-d264359577fe" />
 
 
 ![Screenshot 2025-05-13 133540](https://github.com/user-attachments/assets/9384fe7e-ff1b-4f40-bfe9-fedc2cc1bc96)
